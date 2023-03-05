@@ -1,0 +1,135 @@
+<div class="container-fluid h-90 w-100">
+  <div class="row h-100">
+    <div class="col-12">
+      <ul ngbNav
+          #nav="ngbNav"
+          [(activeId)]="active"
+          class="nav-tabs mt-4">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink>Importa json</a>
+          <ng-template ngbNavContent>
+            <div class="row mt-4">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-12">
+                    <button type="button"
+                            (click)="import()"
+                            class="btn btn-outline-success float-end">Importa</button>
+                  </div>
+                  <div class="col-12 mt-4">
+                    <textarea class="form-control w-100 "
+                              [(ngModel)]="value"
+                              rows="20"></textarea>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+          <a ngbNavLink>Ispeziona</a>
+          <ng-template ngbNavContent>
+            <div *ngIf="tableContent && tableContent.length"
+                 class="table-wrapper">
+
+              {{tableContent}}
+              <button class="btn show-button"
+                      (click)="flat()">
+                estrai
+                <bi name="box-arrow-down-right"></bi>
+              </button>
+              <ul *ngIf="hiddenColumns && hiddenColumns.length"
+                  class="hidden-list">
+                <li *ngFor="let column of hiddenColumns">
+                  <button class="btn show-button"
+                          (click)="show(column)">
+                    {{column}}
+                    <bi name="eye"></bi>
+                  </button>
+                </li>
+              </ul>
+              <!-- <table class="table">
+                <thead>
+                  <tr>
+                    <th *ngFor="let column of columns; let i = index"
+                        scope="col"
+                        [sortable]="column.name"
+                        (sort)="onSort($event)"
+                        [hidden]="!columns[i].visible">
+                      <div class="
+                        header-wrapper">
+                        <span class="float-start column-name">{{column.name}}
+                          <bi *ngIf="column.direction == 'asc'"
+                              class="order-icon"
+                              name='caret-up'>
+                          </bi>
+                          <bi *ngIf="column.direction == 'desc'"
+                              class="order-icon"
+                              name='caret-down'>
+                          </bi>
+                          <bi *ngIf="column.direction != 'desc' && column.direction != 'asc'"
+                              class="order-icon"
+                              name='usb-c'>
+                          </bi>
+                        </span>
+                        <button class="btn hide-button float-end"
+                                (click)="hide(column.name,$event)">
+                          <bi name="eye-slash"></bi>
+                        </button>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of tableContent">
+                    <td *ngFor="let column of columns">
+                      <div [ngSwitch]="rowHasColumn(column.name, row.tableData)">
+                        <ng-container *ngSwitchCase="true"
+                                      [ngTemplateOutlet]="hasData"
+                                      [ngTemplateOutletContext]=" {$implicit: getColumn(column.name, row.tableData)}">
+                        </ng-container>
+
+                        <ng-container *ngSwitchDefault
+                                      [ngTemplateOutlet]="doesNotHaveData">
+                        </ng-container>
+                      </div>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table> -->
+            </div>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav"
+           class="mt-2"></div>
+    </div>
+  </div>
+</div>
+<ngb-toast *ngIf="showAlert"
+           class="toast-container position-fixed top-0 end-0 m-3"
+           [autohide]="true">
+  Il testo inserito non è un json valido
+</ngb-toast>
+<ng-template #popContent
+             let-value="value">
+  <pre [innerHTML]="value"></pre>
+</ng-template>
+<ng-template #hasData
+             let-data>
+  <div [hidden]="!data.visible">
+    <button type="button"
+            class="btn btn-outline-secondary me-2"
+            [ngbPopover]="popContent"
+            triggers="manual"
+            #p="ngbPopover"
+            (click)="togglePopOver(p, data.context)">
+      {{data.value}}
+    </button>
+  </div>
+</ng-template>
+<ng-template #doesNotHaveData>
+  <div></div>
+</ng-template>

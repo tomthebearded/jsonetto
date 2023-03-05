@@ -1,0 +1,177 @@
+@import "./../../../../shared-style-variables.scss";
+
+textarea {
+  border-width: 1;
+  border-color: $flavour-color;
+  border-style: solid;
+  border-radius: 25px;
+  width: auto;
+  background-color: $background-color;
+  resize: none;
+}
+
+th {
+  cursor: pointer;
+  top: 0;
+  z-index: 1;
+  background: $background-color;
+  position: sticky;
+}
+
+td:has(div[hidden]) {
+  display: none;
+}
+
+.nav-tabs {
+  border-bottom: $flavour-color solid;
+}
+
+.nav-link {
+  color: $flavour-color;
+  border-color: $flavour-color;
+}
+
+.nav-link.active {
+  color: $text-color;
+  border-color: $flavour-color;
+  background-color: $background-color;
+}
+
+.form-control:focus {
+  color: $text-color;
+  background-color: $background-color;
+  border-color: $flavour-color;
+  border-style: solid;
+  border-radius: 25px;
+  outline: none;
+  box-shadow: none;
+}
+
+.h-90 {
+  height: 90% !important;
+}
+
+.btn-outline-success {
+  color: $flavour-color;
+  border-color: $flavour-color;
+}
+
+.btn-outline-success:focus {
+  background-color: $flavour-color;
+  color: $text-color;
+}
+
+.btn-outline-success:active {
+  background-color: $flavour-color;
+  color: $text-color;
+}
+
+.btn-outline-success:hover {
+  background-color: $flavour-color;
+  color: $text-color;
+}
+
+.form-control {
+  color: $text-color;
+}
+
+ngb-toast {
+  color: $text-color;
+  background-color: $danger-color;
+}
+
+table {
+  color: $text-color !important;
+  min-width: max-content;
+}
+
+.table-wrapper {
+  max-width: 100vw;
+  max-height: 80vh;
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.btn-outline-secondary {
+  color: $text-color;
+  background-color: $background-color;
+  border-color: $flavour-color;
+  border-style: solid;
+  border-radius: 25px;
+  outline: none;
+  box-shadow: none;
+}
+
+::-webkit-scrollbar {
+  border-radius: 25px;
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $text-color;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $flavour-color;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $flavour-color;
+}
+
+.hide-button {
+  min-width: min-content;
+  float: right;
+  margin-left: 1rem;
+  color: $flavour-color;
+  background-color: $background-color;
+  border-color: $flavour-color;
+  border-style: solid;
+  border-radius: 25px;
+}
+
+.show-button {
+  display: flex;
+  align-items: center;
+  min-width: min-content;
+  margin: 1rem;
+  float: left;
+  color: $flavour-color;
+  background-color: $background-color;
+  border-color: $flavour-color;
+  border-style: solid;
+  border-radius: 25px;
+  bi {
+    margin-left: 1rem;
+  }
+}
+
+bi {
+  color: $flavour-color;
+  background-color: $background-color;
+  width: 1rem;
+  height: 1rem;
+}
+
+.header-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.column-name {
+  align-items: center;
+  display: flex;
+  flex: auto;
+  bi {
+    margin-left: 1rem;
+  }
+}
+
+.hidden-list {
+  list-style: none;
+  display: block;
+}

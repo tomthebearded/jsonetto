@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import "bootstrap/scss/bootstrap";
+@import "./shared-style-variables.scss";
+body {
+  background-color: #191414;
+  color: white;
+  height: 100vh;
+}
+
+.no-cursor {
+  cursor: default;
+}
+.popover{
+  background: none;
+}
+.popover-body {
+  color: $text-color;
+  border-color: $flavour-color;
+  border-style: solid;
+  border-radius: 25px;
+  background: $background-color;
+  width: fit-content;
+}
