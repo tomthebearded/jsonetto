@@ -23,6 +23,21 @@ export class JsonVisualizerComponent {
   public tableContent: TableRow[] = [];
   public value?: string | null;
 
+  onFiledrop(event: any) {
+    if (!event?.target?.files
+      || event.target.files > 1)
+      return;
+    if (!this.validateExtensions(event.target.files[0]))
+      this.showAlert = true;
+
+    const reader = new FileReader();
+    reader.addEventListener('load', (event) => {
+      this.value = event?.target?.result?.toString();
+      this.import();
+    });
+    reader.readAsText(event.target.files[0]);
+  }
+
   import(): void {
     this.resetData();
 
@@ -134,6 +149,7 @@ export class JsonVisualizerComponent {
     if (!this.jsonArray || !this.jsonArray.length)
       return;
     try {
+      this.columns = [];
       this.jsonArray.forEach(j => {
         const row = new TableRow();
         this.unpackAndFlatJson(j, row);
@@ -146,7 +162,11 @@ export class JsonVisualizerComponent {
   }
 
   private unpackAndFlatJson(json: any, tableRow: TableRow, prefix?: string | null): void {
+    if (!json || !tableRow)
+      return;
+
     let currentValue: any;
+
     Object.keys(json).forEach(k => {
       var data = new TableData();
       data.name = !prefix?.trim() ? k : prefix + k;
@@ -177,6 +197,7 @@ export class JsonVisualizerComponent {
         }
       }
     });
+
   }
 
   rowHasColumn(column: string, data: TableData[]): boolean {
@@ -205,6 +226,9 @@ export class JsonVisualizerComponent {
   }
 
   private unpackJson(json: any, tableRow: TableRow): void {
+    if (!json || !tableRow)
+      return;
+
     let currentValue: any;
 
     Object.keys(json).forEach(k => {
@@ -258,6 +282,11 @@ export class JsonVisualizerComponent {
     } catch {
       return null;
     }
+  }
+
+  private validateExtensions(file: File): boolean {
+    let extension = file?.name?.toLowerCase().match(/\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gmi)?.[0]
+    return extension === '.json';
   }
 }
 

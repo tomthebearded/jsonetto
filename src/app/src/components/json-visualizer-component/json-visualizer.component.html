@@ -16,10 +16,23 @@
                             (click)="import()"
                             class="btn btn-outline-success float-end">Importa</button>
                   </div>
-                  <div class="col-12 mt-4">
+                  <div class="col-8 mt-4">
                     <textarea class="form-control w-100 "
                               [(ngModel)]="value"
                               rows="20"></textarea>
+                  </div>
+                  <div class="col-4 mt-4">
+                    <div class="dropzone">
+                      <label for="file">Or <span class="select-button">select</span> from
+                        your computer</label>
+                      <input type="file"
+                             id="file"
+                             accept="json"
+                             multiple="false"
+                             (drop)="onFiledrop($event)"
+                             (change)="onFiledrop($event)"
+                             #fileDropRef />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -101,7 +114,8 @@ header-wrapper">
                       </tr>
                     </tbody>
                   </table>
-                </cdk-virtual-scroll-viewport></div>
+                </cdk-virtual-scroll-viewport>
+              </div>
 
             </div>
           </ng-template>
