@@ -12,6 +12,7 @@ import {
   EyeSlash, CaretDown, CaretUp, UsbC, Eye, BoxArrowDownRight
 } from 'ng-bootstrap-icons/icons';
 import { CommonModule } from '@angular/common';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 const icons = {
   EyeSlash,
@@ -38,6 +39,7 @@ const icons = {
     NgbPaginationModule,
     NgbPopoverModule,
     NgbTypeaheadModule,
+    ScrollingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

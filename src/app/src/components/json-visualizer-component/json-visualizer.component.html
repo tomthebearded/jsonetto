@@ -21,7 +21,6 @@
                               [(ngModel)]="value"
                               rows="20"></textarea>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -31,74 +30,79 @@
           <a ngbNavLink>Ispeziona</a>
           <ng-template ngbNavContent>
             <div *ngIf="tableContent && tableContent.length"
-                 class="table-wrapper">
+                 class="table-wrapper row">
+              {{tableContent[0]}}
+              <div class="col-12">
+                <button class="btn show-button"
+                        (click)="flat()">
+                  estrai
+                  <bi name="box-arrow-down-right"></bi>
+                </button>
+                <ul *ngIf="hiddenColumns && hiddenColumns.length"
+                    class="hidden-list">
+                  <li *ngFor="let column of hiddenColumns">
+                    <button class="btn show-button"
+                            (click)="show(column)">
+                      {{column}}
+                      <bi name="eye"></bi>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12">
+                <cdk-virtual-scroll-viewport itemSize="10">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th *ngFor="let column of columns; let i = index"
+                            scope="col"
+                            [sortable]="column.name"
+                            (sort)="onSort($event)"
+                            [hidden]="!columns[i].visible">
+                          <div class="
+header-wrapper">
+                            <span class="float-start column-name">{{column.name}}
+                              <bi *ngIf="column.direction == 'asc'"
+                                  class="order-icon"
+                                  name='caret-up'>
+                              </bi>
+                              <bi *ngIf="column.direction == 'desc'"
+                                  class="order-icon"
+                                  name='caret-down'>
+                              </bi>
+                              <bi *ngIf="column.direction != 'desc' && column.direction != 'asc'"
+                                  class="order-icon"
+                                  name='usb-c'>
+                              </bi>
+                            </span>
+                            <button class="btn hide-button float-end"
+                                    (click)="hide(column.name,$event)">
+                              <bi name="eye-slash"></bi>
+                            </button>
+                          </div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *cdkVirtualFor="let row of tableContent">
+                        <td *ngFor="let column of columns">
+                          <div [ngSwitch]="rowHasColumn(column.name, row.tableData)">
+                            <ng-container *ngSwitchCase="true"
+                                          [ngTemplateOutlet]="hasData"
+                                          [ngTemplateOutletContext]=" {$implicit: getColumn(column.name, row.tableData)}">
+                            </ng-container>
 
-              {{tableContent}}
-              <button class="btn show-button"
-                      (click)="flat()">
-                estrai
-                <bi name="box-arrow-down-right"></bi>
-              </button>
-              <ul *ngIf="hiddenColumns && hiddenColumns.length"
-                  class="hidden-list">
-                <li *ngFor="let column of hiddenColumns">
-                  <button class="btn show-button"
-                          (click)="show(column)">
-                    {{column}}
-                    <bi name="eye"></bi>
-                  </button>
-                </li>
-              </ul>
-              <!-- <table class="table">
-                <thead>
-                  <tr>
-                    <th *ngFor="let column of columns; let i = index"
-                        scope="col"
-                        [sortable]="column.name"
-                        (sort)="onSort($event)"
-                        [hidden]="!columns[i].visible">
-                      <div class="
-                        header-wrapper">
-                        <span class="float-start column-name">{{column.name}}
-                          <bi *ngIf="column.direction == 'asc'"
-                              class="order-icon"
-                              name='caret-up'>
-                          </bi>
-                          <bi *ngIf="column.direction == 'desc'"
-                              class="order-icon"
-                              name='caret-down'>
-                          </bi>
-                          <bi *ngIf="column.direction != 'desc' && column.direction != 'asc'"
-                              class="order-icon"
-                              name='usb-c'>
-                          </bi>
-                        </span>
-                        <button class="btn hide-button float-end"
-                                (click)="hide(column.name,$event)">
-                          <bi name="eye-slash"></bi>
-                        </button>
-                      </div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let row of tableContent">
-                    <td *ngFor="let column of columns">
-                      <div [ngSwitch]="rowHasColumn(column.name, row.tableData)">
-                        <ng-container *ngSwitchCase="true"
-                                      [ngTemplateOutlet]="hasData"
-                                      [ngTemplateOutletContext]=" {$implicit: getColumn(column.name, row.tableData)}">
-                        </ng-container>
+                            <ng-container *ngSwitchDefault
+                                          [ngTemplateOutlet]="doesNotHaveData">
+                            </ng-container>
+                          </div>
 
-                        <ng-container *ngSwitchDefault
-                                      [ngTemplateOutlet]="doesNotHaveData">
-                        </ng-container>
-                      </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </cdk-virtual-scroll-viewport></div>
 
-                    </td>
-                  </tr>
-                </tbody>
-              </table> -->
             </div>
           </ng-template>
         </li>

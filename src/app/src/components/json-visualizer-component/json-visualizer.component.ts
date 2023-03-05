@@ -36,19 +36,15 @@ export class JsonVisualizerComponent {
       return;
     }
 
-    console.time('get json')
     this.jsonArray = Array.isArray(this.json)
       ? this.json
       : [this.json];
-    console.timeEnd('get json')
 
-    console.time('parse json')
     this.jsonArray.forEach(j => {
       const row = new TableRow();
       this.unpackJson(j, row);
       this.content.push(row);
     });
-    console.timeEnd('parse json')
 
     this.tableContent = this.content;
     this.active = 2;
@@ -109,12 +105,14 @@ export class JsonVisualizerComponent {
     if (direction === '' || column === '')
       return this.tableContent;
 
-    return this.content.sort((a: TableRow, b: TableRow) => {
+    var sortedContent = this.content.sort((a: TableRow, b: TableRow) => {
       var dataA = a.tableData.find(t => t.name === column)?.value?.toString() ?? '';
       var dataB = b.tableData.find(t => t.name === column)?.value?.toString() ?? '';
       const res = dataA < dataB ? -1 : dataA > dataB ? 1 : 0;
       return direction === 'asc' ? res : -res;
     });
+
+    return this.tableContent = [...sortedContent];
   }
 
   togglePopOver(popover: NgbPopover, value: any): void {
@@ -208,7 +206,6 @@ export class JsonVisualizerComponent {
 
   private unpackJson(json: any, tableRow: TableRow): void {
     let currentValue: any;
-    console.time('parsing ' + json)
 
     Object.keys(json).forEach(k => {
       var data = new TableData();
@@ -230,7 +227,6 @@ export class JsonVisualizerComponent {
 
       tableRow.tableData.push(data);
     });
-    console.time('parsing ' + json)
   }
 
   private cutString(str?: string | null): string {

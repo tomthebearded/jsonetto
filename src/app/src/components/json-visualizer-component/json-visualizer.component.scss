@@ -12,10 +12,7 @@ textarea {
 
 th {
   cursor: pointer;
-  top: 0;
-  z-index: 1;
   background: $background-color;
-  position: sticky;
 }
 
 td:has(div[hidden]) {
@@ -85,13 +82,9 @@ table {
   min-width: max-content;
 }
 
-.table-wrapper {
-  max-width: 100vw;
-  max-height: 80vh;
-  display: block;
-  overflow-x: auto;
-  white-space: nowrap;
-}
+// ::ng-deep .cdk-virtual-scroll-content-wrapper {
+//   transform: translateY(0px) !important;
+// }
 
 .btn-outline-secondary {
   color: $text-color;
@@ -174,4 +167,8 @@ bi {
 .hidden-list {
   list-style: none;
   display: block;
+}
+
+cdk-virtual-scroll-viewport {
+  height: 80vh;
 }
