@@ -1,0 +1,31 @@
+<div class="container-fluid h-90 w-100">
+  <div class="row h-100">
+    <div class="col-12">
+      <ul ngbNav
+          #nav="ngbNav"
+          [(activeId)]="active"
+          class="nav-tabs mt-4">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink>Import</a>
+          <ng-template ngbNavContent>
+            <import (importSucceded)="handleImportSuccess($event)"></import>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+          <a ngbNavLink>Inspect</a>
+          <ng-template ngbNavContent>
+            <visualizer></visualizer>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav"
+           class="mt-2"></div>
+    </div>
+  </div>
+</div>
+<ngb-toast *ngIf="showAlert"
+           class="toast-container position-fixed top-0 end-0 m-3"
+           [autohide]="true"
+           (hidden)="showAlert = false">
+  Something went wrong
+</ngb-toast>

@@ -1,11 +1,4 @@
-@import "./../shared-style-variables.scss";
-
-nav {
-  background-color: black;
-  a {
-    color: $text-color;
-  }
-}
+@import "./../../../../../../shared-style-variables.scss";
 
 textarea {
   border-width: 1;

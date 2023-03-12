@@ -1,18 +1,21 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NgbModule, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
-import { JsonVisualizerComponent } from './src/components/json-visualizer-component/json-visualizer.component';
 import { FormsModule } from '@angular/forms';
-import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbdSortableHeader } from './src/directives/sortable-directive';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule, NgbPaginationModule, NgbPopoverModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { BootstrapIconsModule } from 'ng-bootstrap-icons';
 import {
-  EyeSlash, CaretDown, CaretUp, UsbC, Eye, BoxArrowDownRight
+  BoxArrowDownRight, CaretDown,
+  CaretUp, Eye, EyeSlash, UsbC
 } from 'ng-bootstrap-icons/icons';
-import { CommonModule } from '@angular/common';
-import { ScrollingModule } from '@angular/cdk/scrolling';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { NgbdSortableHeader } from './src/directives/sortable-directive';
+import { HomeComponent } from './src/pages/home/home.component';
+import { ImportComponent } from './src/pages/home/components/import/import.component';
+import { VisualizerComponent } from './src/pages/home/components/visualizer/visualizer.component';
+import { JsonService } from './src/services/json.service';
 
 const icons = {
   EyeSlash,
@@ -26,7 +29,9 @@ const icons = {
 @NgModule({
   declarations: [
     AppComponent,
-    JsonVisualizerComponent
+    HomeComponent,
+    ImportComponent,
+    VisualizerComponent
   ],
   imports: [
     AppRoutingModule,
@@ -41,7 +46,9 @@ const icons = {
     NgbTypeaheadModule,
     ScrollingModule
   ],
-  providers: [],
+  providers: [
+    JsonService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
