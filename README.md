@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Electron build
  
-Follow the instructions at these ling https://www.electronjs.org/docs/latest/tutorial/tutorial-packaging
+Follow the instructions at this link https://www.electronjs.org/docs/latest/tutorial/tutorial-packaging
 
 ## Development server
 
